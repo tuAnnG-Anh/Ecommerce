@@ -1,7 +1,8 @@
-import { Layout } from "antd";
 import { PropsWithChildren } from "react";
-import Header from "@components/Header";
-const { Footer, Content } = Layout;
+import Header from "@components/Layouts/Header";
+import Footer from "@components/Layouts/Footer";
+import { NotificationBar } from "./NotificationBar";
+
 interface Props {
   children: JSX.Element;
 }
@@ -14,11 +15,12 @@ interface Props extends PropsWithChildren<any> {
 
 const DefaultLayout: React.FC<Props> = (props: Props) => {
   return (
-    <Layout className="">
+    <div className="wrapper">
+      <NotificationBar />
       <Header />
-      <Content>{props.children}</Content>
-      <Footer>Footer</Footer>
-    </Layout>
+      <section id="content">{props.children}</section>
+      <Footer />
+    </div>
   );
 };
 
