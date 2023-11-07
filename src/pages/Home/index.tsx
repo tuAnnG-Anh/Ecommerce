@@ -19,19 +19,20 @@ import articleImg1 from "@resources/images/article1.jpeg";
 import { CardProduct } from "@/components/Products/CardProduct";
 import { CartArticle } from "@/components/CardArticle";
 import { FormInput } from "@/components/FormInput";
+import { CarouselRef } from "antd/es/carousel";
 
 const Home: React.FC = () => {
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
-  };
-  const ref = useRef<HTMLInputElement>(null);
+  // const onChange = (currentSlide: number) => {
+  //   console.log(currentSlide);
+  // };
+  const ref = useRef<CarouselRef>(null);
   return (
     <div className="font-Inter">
       <div className=" relative bg-white">
         <div className="slider flex gap-8 flex-col  pb-10  w-5/6  mx-auto">
           <div className="relative">
             <Carousel
-              afterChange={onChange}
+              // afterChange={onChange}
               autoplay
               ref={ref}
               dots={{
