@@ -95,7 +95,7 @@ const Home: React.FC = () => {
         <div className=" w-5/6  mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 gap-4 ">
             <div
-              className={`h-96 flex items-end relative bg-[#F3F5F7] bg-[url(./src/resources/images/livingroom.jpeg)] bg-bottom bg-contain bg-blend-multiply bg-no-repeat `}
+              className={`h-96 flex items-end relative bg-[#F3F5F7] bg-[url(/src/resources/images/livingroom.jpeg)] bg-bottom bg-contain bg-blend-multiply bg-no-repeat `}
             >
               <div className="absolute top-8 right-8 left-8 font-Poppins">
                 <h3 className="font-medium text-[1.75rem] leading-[2.125rem] -tracking-[0.0375rem]">
@@ -110,7 +110,7 @@ const Home: React.FC = () => {
                 </a>
               </div>
             </div>
-            <div className="h-48 bg-[#F3F5F7] bg-[url('./src/resources/images/bedroom.jpeg')]  bg-42% bg-[center_right_0rem] bg-blend-multiply bg-no-repeat relative ">
+            <div className="h-48 bg-[#F3F5F7] bg-[url('/src/resources/images/bedroom.jpeg')]  bg-42% bg-[center_right_0rem] bg-blend-multiply bg-no-repeat relative ">
               <div className="absolute bottom-8 right-8 left-8 font-Poppins ">
                 <h3 className="font-medium text-[1.75rem] leading-[2.125rem] -tracking-[0.0375rem]">
                   Bedroom
@@ -124,7 +124,7 @@ const Home: React.FC = () => {
                 </a>
               </div>
             </div>
-            <div className="h-48 bg-[#F3F5F7] bg-[url('./src/resources/images/kitchen.jpeg')]  bg-42% bg-[center_right_1rem] bg-blend-multiply bg-no-repeat relative ">
+            <div className="h-48 bg-[#F3F5F7] bg-[url('/src/resources/images/kitchen.jpeg')]  bg-42% bg-[center_right_1rem] bg-blend-multiply bg-no-repeat relative ">
               <div className="absolute bottom-8 right-8 left-8 font-Poppins ">
                 <h3 className="font-medium text-[1.75rem] leading-[2.125rem] -tracking-[0.0375rem]">
                   Bedroom

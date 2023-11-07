@@ -16,7 +16,7 @@ const Footer = () => {
           <p className="">Gift & Decoration Store</p>
         </div>
 
-        <ul className="text-xs leading-[1.375rem]  font-normal flex flex-col justify-center items-center text-neutral-100">
+        <ul className="text-sm leading-[1.375rem] font-normal flex gap-8 flex-col justify-center items-center text-neutral-100">
           <li className="cursor-pointer">Home</li>
           <li className="cursor-pointer">Shop</li>
           <li className="cursor-pointer">Product</li>
