@@ -11,7 +11,6 @@ import {
 } from "react-icons-sax";
 import slide1 from "@resources/images/0db6128ab1993d65eae0e96498fbd94e.jpeg";
 import bannerImg from "@resources/images/banner.jpeg";
-
 // import livingRoomImg from "@resources/images/livingroom.jpeg";
 import productImg from "@resources/images/product.jpeg";
 import articleImg1 from "@resources/images/article1.jpeg";
