@@ -5,9 +5,9 @@ interface Props {
 }
 export const CartArticle: React.FC<Props> = (props: Props) => {
   return (
-    <div>
+    <div className="article">
       <div>
-        <img src={props.img} alt="" className="h-72 object-cover" />
+        <img src={props.img} alt="" className="h-72 w-full object-cover" />
       </div>
       <div className="mt-4">
         <h3 className="text-[#23262F] font-semibold leading-[1.625rem]">

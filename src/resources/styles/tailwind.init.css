@@ -6,3 +6,26 @@
     @apply scroll-smooth font-Inter text-neutral-700;
   }
 }
+
+/* Firefox */
+.scroller {
+  scrollbar-width: 12rem;
+  scrollbar-color: #343839 #e8ecef;
+}
+
+/* Chrome, Edge, and Safari */
+.scroller::-webkit-scrollbar {
+  width: 12rem;
+  height: 0.25rem;
+}
+
+.scroller::-webkit-scrollbar-track {
+  background: #e8ecef;
+  border-radius: 5px;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background-color: #343839;
+  border-radius: 5rem;
+  /* border: 3px solid red; */
+}

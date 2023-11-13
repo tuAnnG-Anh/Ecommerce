@@ -5,19 +5,32 @@ import {
   EssetionalMenuOutline,
 } from "react-icons-sax";
 import { Layout } from "antd";
+import { useState } from "react";
+import { Logo } from "@components/Logo";
+import { MenuMobile } from "@/components/Layouts/MenuMobile";
 const Header = () => {
+  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+
+  const showDrawer = () => {
+    setOpenDrawer(true);
+  };
+
+  const onCloseDrawer = () => {
+    setOpenDrawer(false);
+  };
   return (
-    <Layout.Header className="bg-white  px-0 py-0 h-auto">
-      <div className="container md:w-9/12  py-4 px-8 md:px-0  mx-auto flex justify-between ">
+    <Layout.Header className="bg-white sticky z-50 top-0  px-0 py-0 h-auto">
+      <MenuMobile onClose={onCloseDrawer} open={openDrawer} />
+      <div className="container px-8 lg:w-9/12 py-4  mx-auto flex justify-between ">
         {/* Logo */}
-        <div className="logo font-Poppins flex justify-center items-center text-base md:text-2xl leading-6 font-medium text-center not-italic">
+        <Logo>
           <button className="md:hidden mr-1 flex">
-            <EssetionalMenuOutline className="text-neutral-700" />
+            <EssetionalMenuOutline
+              className="text-neutral-700"
+              onClick={showDrawer}
+            />
           </button>
-          <h3 className="cursor-pointer text-primary">
-            3legant<span className="text-[#6C7275]">.</span>
-          </h3>
-        </div>
+        </Logo>
 
         {/* nav-bar */}
         <ul className="text-sm leading-6 font-Space_Grotesk font-medium hidden md:flex gap-10 items-center text-neutral-400 ">

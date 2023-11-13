@@ -16,6 +16,7 @@ export default {
         "neutral-300": "#E8ECEF",
         "neutral-200": "#F3F5F7",
         "neutral-100": "#FEFEFE",
+        "black-600": "#605F5F",
       },
       backgroundImage: {
         hero: "url('./src/resources/images/livingroom.jpeg')",

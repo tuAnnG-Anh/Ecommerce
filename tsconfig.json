@@ -5,8 +5,11 @@
       "@/*": ["./src/*"],
       "@configs/*": ["./src/configs/*"],
       "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/components/Layouts/*"],
       "@pages/*": ["./src/pages/*"],
-      "@resources/*": ["./src/resources/*"]
+      "@resources/*": ["./src/resources/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@assets/*": ["./src/assets/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
