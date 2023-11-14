@@ -4,11 +4,12 @@ import HomePage from "@pages/Home";
 // import NotFound from "@pages/NotFound";
 import DefaultLayout from "@components/Layouts/DefaultLayout";
 import { DetailPage } from "@/pages/Detail";
-import { Dashboard } from "@/pages/Admin/Dashboard";
+import { Dashboard } from "@/pages/Admin/screens/Dashboard";
 import { AdminLayout } from "@/pages/Admin/Layout";
 import NotFound from "@/pages/NotFound";
-import { AdminUser } from "@/pages/Admin/User";
-import { AdminProduct } from "@/pages/Admin/Product";
+import { AdminUser } from "@/pages/Admin/screens/User";
+import { AdminProduct } from "@/pages/Admin/screens/Product";
+import { AdminLogin } from "@/pages/Admin/screens/Login";
 
 // import Login from "@pages/Authentication/login";
 // import Register from "@pages/Authentication/register";
@@ -49,6 +50,11 @@ export const routes = [
     path: "admin/user",
     page: AdminUser,
     layout: AdminLayout,
+  },
+  {
+    path: "admin/login",
+    page: AdminLogin,
+    layout: null,
   },
   // {
   //   path: "/order",

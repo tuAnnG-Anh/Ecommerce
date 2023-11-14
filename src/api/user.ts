@@ -1,4 +1,4 @@
-// import { IUser } from "@/interfaces/IUser";
+import { IUser } from "@/interfaces/IUser";
 // import { IUsers } from "@/interfaces/IUser";
 import { ApiClient } from "@/utils/ApiClient";
 
@@ -11,9 +11,9 @@ export const getUser = async (page: number | string, limit: number | string) =>
   });
 // .then((res) => res.data);
 
-// export const updateUser = async (id: number | string, user: IUser) => {
-//   await ApiClient.post("");
-// };
+export const updateUser = async (id: number | string, user: IUser) => {
+  await ApiClient.post(`user/${id}`, user);
+};
 
 export const deleteUser = async (id: number | string) => {
   await ApiClient.delete(`user/${id}`);

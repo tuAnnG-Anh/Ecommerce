@@ -8,7 +8,6 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 const { Content } = Layout;
 
 const contentStyle: React.CSSProperties = {
-  minHeight: "100vh",
   padding: "1rem",
 };
 interface Props {
@@ -21,7 +20,9 @@ export const AdminLayout: React.FC<Props> = (props: Props) => {
       <Layout>
         <Sidenav collapsed={collapsed} />
         <Layout
-          className={`${collapsed ? "ml-20" : "ml-[200px]"} transition-all`}
+          className={`${
+            collapsed ? "ml-20" : "ml-[200px]"
+          } min-h-screen transition-all`}
         >
           <HeaderComponent>
             <Button

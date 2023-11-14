@@ -13,6 +13,7 @@ interface Props {
 
 export const Sidenav: React.FC<Props> = ({ collapsed }: Props) => {
   const navigate = useNavigate();
+
   return (
     <Sider
       trigger={null}
