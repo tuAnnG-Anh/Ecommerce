@@ -54,7 +54,6 @@ export const AdminUser: React.FC = () => {
 
   const handleDelete = useMutation({
     mutationFn: (id: number | string) => deleteUser(id),
-    // onMutate: (id) => {},
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user", page, limit] });
       message.success("Deleted!");

@@ -15,8 +15,12 @@ import { CardProduct } from "@/components/Products/CardProduct";
 import { CartArticle } from "@/components/CardArticle";
 import { FormInput } from "@/components/FormInput";
 import { Slider } from "@/components/Slider";
+import { authStore } from "@/store/auth";
 
 const HomePage: React.FC = () => {
+  const { user } = authStore();
+  console.log(user);
+
   return (
     <div className="home px-8 container lg:w-9/12 mx-auto">
       <div className="slider flex gap-8 flex-col mb-8  ">
@@ -43,7 +47,7 @@ const HomePage: React.FC = () => {
             </p>
           </div>
           <div
-            className={`h-96 flex items-end relative bg-[#F3F5F7] bg-[url(/src/resources/images/livingroom.jpeg)] bg-bottom bg-contain bg-blend-multiply bg-no-repeat `}
+            className={`h-96 flex items-end relative bg-[#F3F5F7] bg-[url('/src/resources/images/livingroom.jpeg')] bg-bottom bg-contain bg-blend-multiply bg-no-repeat `}
           >
             <div className="absolute top-8 right-8 left-8 font-Poppins">
               <h3 className="font-medium text-[1.75rem] leading-[2.125rem] -tracking-[0.0375rem]">

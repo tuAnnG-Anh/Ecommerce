@@ -1,5 +1,11 @@
+import { IAccount } from "@/interfaces/IUser";
 import { ApiClient } from "@/utils/ApiClient";
-import { IUser } from "@/interfaces/IUser";
 
-export const Login = async (user: IUser) =>
-  await ApiClient.get("auth/login", user);
+export const loginApi = async (user: IAccount) => {
+  try {
+    const res = await ApiClient.post("auth/login", user);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

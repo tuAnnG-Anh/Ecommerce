@@ -1,14 +1,17 @@
 export interface IUser {
   _id: string;
-  image: string;
+  avatar: string;
   email: string;
   name: string;
-  password?: string;
+  password: string;
   isAdmin: boolean;
   createdAt: Date;
   updatedAt: Date;
+  accessToken: string;
+  refreshToken: string;
 }
 export type IUsers = Pick<
   IUser,
-  "email" | "name" | "isAdmin" | "createdAt" | "updatedAt"
->[];
+  "avatar" | "email" | "name" | "isAdmin" | "accessToken" | "refreshToken"
+>;
+export type IAccount = Pick<IUser, "email" | "password">;

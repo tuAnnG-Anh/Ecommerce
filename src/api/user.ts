@@ -10,11 +10,13 @@ export const getUser = async (page: number | string, limit: number | string) =>
     },
   });
 // .then((res) => res.data);
+export const getUserById = async (id: number | string) => {
+  const response = await ApiClient.get(`user/${id}`);
+  return response.data;
+};
 
-export const updateUser = async (id: number | string, user: IUser) => {
+export const updateUser = async (id: number | string, user: IUser) =>
   await ApiClient.post(`user/${id}`, user);
-};
 
-export const deleteUser = async (id: number | string) => {
+export const deleteUser = async (id: number | string) =>
   await ApiClient.delete(`user/${id}`);
-};

@@ -1,5 +1,5 @@
-import { ConfigProvider, Drawer } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
+import { ConfigProvider, Drawer, Input } from "antd";
+import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import { Logo } from "@components/Logo";
 import React, { useState } from "react";
 
@@ -16,7 +16,9 @@ function getItem(
   key: React.Key,
   icon?: React.ReactNode,
   children?: MenuItem[],
-  type?: "group"
+  type?: "group",
+  danger?: boolean,
+  className?: string
 ): MenuItem {
   return {
     key,
@@ -24,6 +26,8 @@ function getItem(
     children,
     label,
     type,
+    danger,
+    className,
   } as MenuItem;
 }
 const items: MenuItem[] = [
@@ -45,7 +49,7 @@ const items: MenuItem[] = [
   getItem("Contact us", "contact", null),
 ];
 const rootSubmenuKeys = ["home", "shop", "product", "contact"];
-export const MenuMobile: React.FC = ({ onClose, open }: Props) => {
+export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
   const [openKeys, setOpenKeys] = useState(["home"]);
 
   const onOpenChange: MenuProps["onOpenChange"] = (keys) => {
@@ -82,6 +86,12 @@ export const MenuMobile: React.FC = ({ onClose, open }: Props) => {
           className="text-neutral-400 text-2xl"
         />
       </div>
+      <Input
+        placeholder="Search"
+        prefix={<SearchOutlined />}
+        allowClear={true}
+        className="border-neutral-400 mt-4 hover:border-neutral-400 px-4 text-sm text-neutral-400 leading-[1.375rem] py-2"
+      />
       <ConfigProvider
         theme={{
           token: {
@@ -102,20 +112,9 @@ export const MenuMobile: React.FC = ({ onClose, open }: Props) => {
           style={{ border: "none" }}
           items={items}
           color="red"
-          className="[&>li]:!p-0 [&>li]:!ms-0 [&>li]:border-b-[1px]  [&>li]!me-0 [&>li>*]:!p-0"
+          className="[&>li]:!p-0 [&>li]:!ms-0 [&>li]:border-b-[1px] [&>li]:!me-0 [&>li]:!w-full [&>li>*]:!p-0"
         />
       </ConfigProvider>
-      <form method="POST">
-        <input type="file" name="avatar" />
-        <button
-          className="bg-black"
-          onClick={(e) => {
-            e.preventDefault;
-          }}
-        >
-          Submit
-        </button>
-      </form>
     </Drawer>
   );
 };

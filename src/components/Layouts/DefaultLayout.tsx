@@ -4,7 +4,7 @@ import Footer from "@components/Layouts/Footer";
 import { NotificationBar } from "./NotificationBar";
 
 interface Props extends PropsWithChildren<any> {
-  children: JSX.Element;
+  children?: JSX.Element;
   loading?: boolean;
 }
 

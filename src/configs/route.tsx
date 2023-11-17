@@ -10,6 +10,7 @@ import NotFound from "@/pages/NotFound";
 import { AdminUser } from "@/pages/Admin/screens/User";
 import { AdminProduct } from "@/pages/Admin/screens/Product";
 import { AdminLogin } from "@/pages/Admin/screens/Login";
+import { LoginPage } from "@/pages/Login";
 
 // import Login from "@pages/Authentication/login";
 // import Register from "@pages/Authentication/register";
@@ -20,6 +21,11 @@ export const routes = [
     path: "/",
     page: HomePage,
     layout: DefaultLayout,
+  },
+  {
+    path: "login",
+    page: LoginPage,
+    layout: null,
   },
   // {
   //   path: "/login",
@@ -37,7 +43,7 @@ export const routes = [
     layout: DefaultLayout,
   },
   {
-    path: "admin/dashboard",
+    path: "dashboard",
     page: Dashboard,
     layout: AdminLayout,
   },

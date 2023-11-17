@@ -9,6 +9,8 @@ interface Props {
   id?: string;
 }
 export const DetailPage: React.FC<Props> = ({ id }: Props) => {
+  console.log(id);
+
   return (
     <div className="detail container px-8 lg:w-9/12 mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
