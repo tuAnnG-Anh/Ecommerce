@@ -31,6 +31,7 @@ export const LoginPage: React.FC = () => {
         handleGetDetailUser(decoded.id, data.accessToken, data.refreshToken);
       }
     },
+    onError: (err) => console.log(err),
   });
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

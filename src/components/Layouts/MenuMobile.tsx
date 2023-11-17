@@ -7,19 +7,71 @@ import {
   FacebookOutlined,
 } from "@ant-design/icons";
 import { Logo } from "@components/Logo";
-import React from "react";
+import React, { useState } from "react";
 
 import { Menu } from "antd";
 
-import SubMenu from "antd/es/menu/SubMenu";
+import type { MenuProps } from "antd";
 import { useNavigate } from "react-router-dom";
+import { authStore } from "@/store/auth";
 interface Props {
   onClose?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   open?: boolean;
 }
+type MenuItem = Required<MenuProps>["items"][number];
 
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  // type?: "group",
+  style?: React.CSSProperties
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    // type,
+    style,
+  } as MenuItem;
+}
+
+const items: MenuItem[] = [
+  getItem("Home", "home", null, undefined, {}),
+  getItem(
+    "Shop",
+    "shop",
+    null,
+    [getItem("Item 1", "item1", null, undefined, { borderRadius: 0 })],
+    {}
+  ),
+  getItem(
+    "Product",
+    "product",
+    null,
+    [getItem("Item 3", "item3", null, undefined, { borderRadius: 0 })],
+    {}
+  ),
+  getItem("Contact Us", "contact us", null, undefined, {}),
+];
+
+// submenu keys of first level
+const rootSubmenuKeys = ["home", "shop", "product", "contact"];
 export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
+  const { userLogged } = authStore();
+  console.log(userLogged);
   const navigate = useNavigate();
+  const [openKeys, setOpenKeys] = useState(["home"]);
+  const onOpenChange: MenuProps["onOpenChange"] = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    if (latestOpenKey && rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
   return (
     <Drawer
       title="Basic Drawer"
@@ -51,65 +103,28 @@ export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
             placeholder="Search"
             prefix={<SearchOutlined />}
             allowClear={true}
-            className="border-neutral-400 mt-4 hover:border-neutral-400 px-4 text-sm text-neutral-400 leading-[1.375rem] py-2"
+            className="!border-neutral-400 mt-4 rounded-lg  px-4 text-sm text-neutral-400 leading-[1.375rem] py-2"
           />
+
           <Menu
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
             mode="inline"
-            theme="light"
-            className="!border-none"
-          >
-            <Menu.Item key="Home">
-              <span>Home</span>
-            </Menu.Item>
-            <SubMenu
-              key="Shop"
-              title={
-                <span>
-                  <span>Shop</span>
-                </span>
-              }
-            >
-              <Menu.Item key="1">Option 5</Menu.Item>
-              <Menu.Item key="2">Option 6</Menu.Item>
-              <Menu.Item key="3">Option 7</Menu.Item>
-              <Menu.Item key="4">Option 8</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="product"
-              title={
-                <span>
-                  <span>Product</span>
-                </span>
-              }
-            >
-              <Menu.Item key="5">Option 5</Menu.Item>
-              <Menu.Item key="6">Option 6</Menu.Item>
-              <Menu.Item key="7">Option 7</Menu.Item>
-              <Menu.Item key="8">Option 8</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="contact">
-              <span>Contact Us</span>
-            </Menu.Item>
-          </Menu>
+            openKeys={openKeys}
+            onOpenChange={onOpenChange}
+            items={items}
+            className="!border-e-0 [&>li>.ant-menu-submenu-title]:!rounded-none [&>li>.ant-menu-submenu-title]:!w-full [&>li>.ant-menu-submenu-title]:!p-[.5rem_0_.5rem_0]  [&>li>.ant-menu-submenu-title]:!m-[.5rem_0_0_0] [&>li]:!rounded-none [&>*:first-child]:!p-[.5rem_0_.5rem_0]  [&>li]:!border-b [&>li]:!m-[.5rem_0_0_0] [&>li]:!w-full [&>*:last-child]:!p-[.5rem_0_.5rem_0]"
+          />
         </div>
         <div className="drawer__bottom h-[13.125rem] justify-between flex flex-col">
           <Menu
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
             mode="inline"
-            theme="light"
-            className="!border-none"
-          >
-            <Menu.Item key="cart">
-              <span>Cart</span>
-            </Menu.Item>
-
-            <Menu.Item key="wishlist">
-              <span>Wishlist</span>
-            </Menu.Item>
-          </Menu>
+            openKeys={openKeys}
+            onOpenChange={onOpenChange}
+            items={[
+              getItem("Cart", "cart", null, undefined, {}),
+              getItem("Wishlist", "wishlist", null, undefined, {}),
+            ]}
+            className="!border-e-0 [&>li>.ant-menu-submenu-title]:!rounded-none [&>li>.ant-menu-submenu-title]:!w-full [&>li>.ant-menu-submenu-title]:!p-[.5rem_0_.5rem_0]  [&>li>.ant-menu-submenu-title]:!m-[.5rem_0_0_0] [&>li]:!rounded-none [&>*:first-child]:!p-[.5rem_0_.5rem_0]  [&>li]:!border-b [&>li]:!m-[.5rem_0_0_0] [&>li]:!w-full [&>*:last-child]:!p-[.5rem_0_.5rem_0] "
+          />
           <button
             className="w-full bg-neutral-700 text-white py-[0.62rem] h-auto rounded-md text-lg font-medium leading-8 -tracking-[0.025rem]"
             onClick={() => navigate("login")}
@@ -117,9 +132,15 @@ export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
             Sign In
           </button>
           <div className="socical flex gap-6">
-            <FacebookOutlined className="text-2xl" />
-            <YoutubeOutlined className="text-2xl" />
-            <InstagramOutlined className="text-2xl" />
+            <a href="">
+              <FacebookOutlined className="text-2xl" />
+            </a>
+            <a>
+              <YoutubeOutlined className="text-2xl" />
+            </a>
+            <a>
+              <InstagramOutlined className="text-2xl" />
+            </a>
           </div>
         </div>
       </div>

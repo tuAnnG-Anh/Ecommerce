@@ -1,7 +1,7 @@
 import { IUser, IUsers } from "@/interfaces/IUser";
 import { create } from "zustand";
 interface AuthState {
-  user: IUsers;
+  userLogged: IUsers;
   updateAuth: (state: IUser, accessToken: string, refreshToken: string) => void;
   removeAuth: () => void;
 }
@@ -14,11 +14,11 @@ const initialState: IUsers = {
   refreshToken: "",
 };
 export const authStore = create<AuthState>((set) => ({
-  user: initialState,
-  updateAuth: (user, accessToken, refreshToken) =>
+  userLogged: initialState,
+  updateAuth: (userLogged, accessToken, refreshToken) =>
     set((state) => ({
       ...state,
-      user: { ...user, accessToken, refreshToken },
+      userLogged: { ...userLogged, accessToken, refreshToken },
     })),
-  removeAuth: () => set({ user: initialState }),
+  removeAuth: () => set({ userLogged: initialState }),
 }));

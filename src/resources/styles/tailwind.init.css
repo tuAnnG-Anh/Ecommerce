@@ -29,16 +29,6 @@
   border-radius: 5rem;
   /* border: 3px solid red; */
 }
-
-.ant-menu-submenu-title {
-  @apply border-b !p-0 !pb-2 !rounded-none !mt-4 !mb-0 !text-neutral-700 !bg-transparent !w-full border-neutral-300 text-sm font-medium leading-6;
-}
-.ant-menu-item {
-  @apply border-b !p-0 !pb-2 !rounded-none !mt-4 !mb-0 !text-neutral-700 !bg-transparent !w-full border-neutral-300 text-sm font-medium leading-6;
-}
-.ant-menu {
-  @apply !bg-transparent;
-}
-.ant-menu-submenu .ant-menu-item {
-  @apply !pl-8 border-none;
-}
+/* .ant-menu-title-content:hover {
+  @apply bg-neutral-300;
+} */

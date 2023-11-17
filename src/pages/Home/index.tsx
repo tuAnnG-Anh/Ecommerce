@@ -15,12 +15,8 @@ import { CardProduct } from "@/components/Products/CardProduct";
 import { CartArticle } from "@/components/CardArticle";
 import { FormInput } from "@/components/FormInput";
 import { Slider } from "@/components/Slider";
-import { authStore } from "@/store/auth";
 
 const HomePage: React.FC = () => {
-  const { user } = authStore();
-  console.log(user);
-
   return (
     <div className="home px-8 container lg:w-9/12 mx-auto">
       <div className="slider flex gap-8 flex-col mb-8  ">
