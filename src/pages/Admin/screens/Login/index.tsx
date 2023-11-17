@@ -1,28 +1,11 @@
-import { Login } from "@/api/auth";
-import { useQuery } from "@tanstack/react-query";
-
 export const AdminLogin = () => {
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: () => {
-  //     Login();
-  //   },
-  // });
-  const handleLogin = (e?: React.FormEvent<HTMLFormElement>) => {
-    // e?.preventDefault();
-    // console.log(e);
-  };
-
   return (
     <div className="bg-white rounded-lg py-5">
       <div className="container flex flex-col mx-auto bg-white rounded-lg pt-12 my-5">
         <div className="flex justify-center w-full h-full my-auto xl:gap-14 lg:justify-normal md:gap-5 ">
           <div className="flex items-center justify-center w-full lg:p-12">
             <div className="flex items-center xl:p-10">
-              <form
-                className="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl"
-                // onSubmit={(e) => handleLogin(e)}
-              >
+              <form className="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl">
                 <h3 className="mb-3 text-4xl font-extrabold text-gray-900">
                   Sign In
                 </h3>
@@ -90,10 +73,7 @@ export const AdminLogin = () => {
                     Forget password?
                   </a>
                 </div>
-                <button
-                  className="w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-secondary-blue"
-                  // onClick={handleLogin}
-                >
+                <button className="w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-secondary-blue">
                   Sign In
                 </button>
                 <p className="text-sm leading-relaxed text-gray-900">
@@ -107,29 +87,6 @@ export const AdminLogin = () => {
           </div>
         </div>
       </div>
-      {/* <div className="flex flex-wrap -mx-3 my-5">
-        <div className="w-full max-w-full sm:w-3/4 mx-auto text-center">
-          <p className="text-sm text-slate-500 py-1">
-            Tailwind CSS Component from{" "}
-            <a
-              href="https://www.loopple.com/theme/motion-landing-library?ref=tailwindcomponents"
-              className="text-slate-700 hover:text-slate-900"
-              target="_blank"
-            >
-              Motion Landing Library
-            </a>{" "}
-            by{" "}
-            <a
-              href="https://www.loopple.com"
-              className="text-slate-700 hover:text-slate-900"
-              target="_blank"
-            >
-              Loopple Builder
-            </a>
-            .
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 };

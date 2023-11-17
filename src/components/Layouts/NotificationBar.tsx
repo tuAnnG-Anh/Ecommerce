@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   MoneyTicketDiscountOutline,
-  EssetionalCloseCircleOutline,
   ArrowArrowRight1Outline,
 } from "react-icons-sax";
 import { CloseOutlined } from "@ant-design/icons";

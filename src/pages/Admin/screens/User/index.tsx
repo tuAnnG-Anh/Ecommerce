@@ -1,7 +1,7 @@
 import { deleteUser, getUser } from "@/api/user";
 import { IUser } from "@/interfaces/IUser";
 import { useQueryString } from "@/utils/utils";
-import ImgCrop from "antd-img-crop";
+// import ImgCrop from "antd-img-crop";
 import {
   keepPreviousData,
   useMutation,
@@ -11,7 +11,7 @@ import {
 import {
   Button,
   Form,
-  Upload,
+  // Upload,
   Input,
   Modal,
   Popconfirm,
@@ -191,7 +191,7 @@ export const AdminUser: React.FC = () => {
           >
             <Input />
           </Form.Item>
-          <Form.Item<IUser>
+          {/* <Form.Item<IUser>
             label="Image"
             name="image"
             rules={[{ required: true, message: "Please input your name!" }]}
@@ -212,7 +212,7 @@ export const AdminUser: React.FC = () => {
                 Avatar
               </Upload>
             </ImgCrop>
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item<IUser>
             label="Email"
             name="email"
