@@ -77,7 +77,7 @@ export const AdminUser: React.FC = () => {
       ellipsis: {
         showTitle: false,
       },
-      render(value, record, index) {
+      render(_, __, index) {
         return index + 1;
       },
     },
