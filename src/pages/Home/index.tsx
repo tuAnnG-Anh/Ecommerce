@@ -6,8 +6,8 @@ import {
   MoneyCardPosOutline,
   EmailsMessagesSmsOutline,
 } from "react-icons-sax";
+
 import bannerImg from "@resources/images/banner.jpeg";
-// import livingRoomImg from "@resources/images/livingroom.jpeg";
 import productImg from "@resources/images/product.jpeg";
 import articleImg1 from "@resources/images/article1.jpeg";
 
@@ -17,6 +17,9 @@ import { FormInput } from "@/components/FormInput";
 import { Slider } from "@/components/Slider";
 
 const HomePage: React.FC = () => {
+  // const accessToken = Cookies.get("user");
+  // console.log(accessToken);
+
   return (
     <div className="home px-8 container lg:w-9/12 mx-auto">
       <div className="slider flex gap-8 flex-col mb-8  ">
@@ -27,7 +30,6 @@ const HomePage: React.FC = () => {
           }}
           className="h-[19rem]  md:h-[33.5rem]"
           classArrow="text-[2rem] bg-white  hidden md:flex"
-          // classChildren="h-[19rem] w-full md:h-[33.5rem]"
         />
       </div>
       <div className=" ">

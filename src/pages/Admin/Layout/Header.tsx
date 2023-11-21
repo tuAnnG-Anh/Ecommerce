@@ -13,8 +13,12 @@ const HeaderComponent: React.FC<Props> = (props: Props) => {
     <Header
       style={{
         backgroundColor: colorBgContainer,
-        boxShadow: "0 4px 10px #dddddd",
+        boxShadow: "10px 4px 10px #dddddd",
         padding: "0",
+        position: "sticky",
+        width: "100%",
+        zIndex: "999",
+        top: 0,
       }}
     >
       {props.children}

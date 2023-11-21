@@ -1,7 +1,6 @@
 import { deleteUser, getUser } from "@/api/user";
 import { IUser } from "@/interfaces/IUser";
 import { useQueryString } from "@/utils/utils";
-// import ImgCrop from "antd-img-crop";
 import {
   keepPreviousData,
   useMutation,
@@ -11,7 +10,6 @@ import {
 import {
   Button,
   Form,
-  // Upload,
   Input,
   Modal,
   Popconfirm,
@@ -20,6 +18,9 @@ import {
   Tag,
   DatePicker,
   message,
+  Upload,
+  UploadFile,
+  UploadProps,
 } from "antd";
 const { RangePicker } = DatePicker;
 import type { ColumnsType } from "antd/es/table";
@@ -30,10 +31,22 @@ import {
 } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ImgCrop from "antd-img-crop";
+import { RcFile } from "antd/es/upload";
 
 export const AdminUser: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    if (fileList.length !== 0)
+      getDataImg(fileList[0]).then((data) => {
+        const src: string = data;
+        setImg(src);
+      });
+    setFileList(newFileList);
+  };
+  const [img, setImg] = useState<string>();
   const queryClient = useQueryClient();
   const queryString: { page?: string; size?: string } = useQueryString();
   const page = Number(queryString?.page) || 1;
@@ -47,10 +60,6 @@ export const AdminUser: React.FC = () => {
 
   const dataSource = users.data?.data?.data;
   const totalItem = users.data?.data?.totalItem;
-
-  // const handleUpdateMutation = useMutation({
-  //   mutationFn: (_) => updateUser(),
-  // });
 
   const handleDelete = useMutation({
     mutationFn: (id: number | string) => deleteUser(id),
@@ -80,6 +89,14 @@ export const AdminUser: React.FC = () => {
       render(_, __, index) {
         return index + 1;
       },
+    },
+    {
+      title: "Avatar",
+      key: "avatar",
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (_, record) => <img src={record.avatar} />,
     },
     {
       title: "Name",
@@ -164,9 +181,29 @@ export const AdminUser: React.FC = () => {
       ),
     },
   ];
-
+  const onPreview = async (file: UploadFile) => {
+    getDataImg(file).then((data) => {
+      const src: string = data;
+      const image = new Image();
+      image.src = src;
+      const imgWindow = window.open(src);
+      imgWindow?.document.write(image.outerHTML);
+    });
+  };
+  const getDataImg = async (file: UploadFile) => {
+    let src = file?.url as string;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file?.originFileObj as RcFile);
+        reader.onload = () => resolve(reader.result as string);
+      });
+    }
+    return src;
+  };
   return (
     <div>
+      <img src={img} alt="" />
       <Button
         type="primary"
         size={"large"}
@@ -184,6 +221,17 @@ export const AdminUser: React.FC = () => {
         okButtonProps={{ className: "bg-secondary-blue" }}
       >
         <Form>
+          <ImgCrop rotationSlider>
+            <Upload
+              action="http://localhost:3001/api/user"
+              listType="picture-card"
+              fileList={fileList}
+              onChange={onChange}
+              onPreview={onPreview}
+              maxCount={1}
+              children={fileList.length < 1 && "+ Upload"}
+            />
+          </ImgCrop>
           <Form.Item<IUser>
             label="Name"
             name="name"
@@ -191,28 +239,6 @@ export const AdminUser: React.FC = () => {
           >
             <Input />
           </Form.Item>
-          {/* <Form.Item<IUser>
-            label="Image"
-            name="image"
-            rules={[{ required: true, message: "Please input your name!" }]}
-          >
-            <ImgCrop
-              rotationSlider
-              // modalProps={{ style: { background: "blue" } }}
-            >
-              <Upload
-                // action="http://localhost:3001/"
-                listType="picture-card"
-                // onChange={onChange}
-                // onPreview={onPreview}
-
-                multiple={false}
-                maxCount={1}
-              >
-                Avatar
-              </Upload>
-            </ImgCrop>
-          </Form.Item> */}
           <Form.Item<IUser>
             label="Email"
             name="email"

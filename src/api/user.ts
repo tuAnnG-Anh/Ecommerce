@@ -10,8 +10,13 @@ export const getUser = async (page: number | string, limit: number | string) =>
     },
   });
 // .then((res) => res.data);
-export const getUserById = async (id: number | string) => {
-  const response = await ApiClient.get(`user/${id}`);
+export const getUserById = async (id: number | string, token: string) => {
+  const response = await ApiClient.get(`user/${id}`, {
+    headers: {
+      Token: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 

@@ -1,4 +1,3 @@
-import "@resources/styles/tailwind.init.css";
 import AppRoutes from "@/routes";
 
 function App() {

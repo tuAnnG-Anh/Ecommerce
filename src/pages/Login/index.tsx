@@ -9,30 +9,40 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { Spin } from "antd";
 import { useState } from "react";
-import { authStore } from "@/store/auth";
-import { jwtDecode } from "jwt-decode";
-import { getUserById } from "@/api/user";
-import { JwtPayload } from "@/interfaces/Jwt";
+
 import { useNavigate } from "react-router-dom";
 import { IAccount } from "@/interfaces/IUser";
+import { useAuthStore } from "@/store/auth";
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from "@/interfaces/Jwt";
+import { getUserById } from "@/api/user";
 
 export const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { updateAuth } = authStore();
   const navigate = useNavigate();
+  const { updateAuth } = useAuthStore();
   const loginMutation = useMutation({
-    mutationFn: (user: IAccount) => loginApi(user),
+    mutationFn: (account: IAccount) => loginApi(account),
     onSuccess(data) {
-      localStorage.setItem("access_token", JSON.stringify(data?.accessToken));
-      const decoded = jwtDecode(data.accessToken) as JwtPayload;
-      if (decoded?.id) {
-        handleGetDetailUser(decoded.id, data.accessToken, data.refreshToken);
+      localStorage.setItem("accessToken", JSON.stringify(data?.accessToken));
+      if (data?.accessToken) {
+        const decoded = jwtDecode(data?.accessToken) as JwtPayload;
+        if (decoded?.id) {
+          handleGetDetailsUser(decoded?.id, data?.accessToken);
+        }
       }
+      navigate("/");
     },
     onError: (err) => console.log(err),
   });
+
+  const handleGetDetailsUser = async (id: string | number, token: string) => {
+    const user = await getUserById(id, token);
+    const userLogged = { ...user.data, token };
+    updateAuth(userLogged);
+  };
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     loginMutation.mutate({
@@ -40,15 +50,7 @@ export const LoginPage: React.FC = () => {
       password,
     });
   };
-  const handleGetDetailUser = async (
-    id: number | string,
-    accessToken: string,
-    refreshToken: string
-  ) => {
-    const res = await getUserById(id);
-    updateAuth(res.data, accessToken, refreshToken);
-    navigate("/");
-  };
+
   return (
     <div>
       <div className="image-login bg-[url('./src/resources/images/loginimg.svg')] bg-top bg-cover bg-blend-multiply bg-no-repeat h-[26.875rem] py-8">

@@ -5,10 +5,12 @@ import { RightOutlined } from "@ant-design/icons";
 import { ButtonCustom } from "@/components/Button";
 
 import ProductCart from "@resources/images/ProductCart.jpeg";
+import { useParams } from "react-router-dom";
 interface Props {
   id?: string;
 }
-export const DetailPage: React.FC<Props> = ({ id }: Props) => {
+export const DetailPage: React.FC<Props> = () => {
+  const { id } = useParams();
   console.log(id);
 
   return (

@@ -26,16 +26,10 @@ export const Slider = ({
 
   return (
     <div className="relative">
-      <Carousel ref={ref} dots={dots}>
-        <div className="">
-          <img src={slide1} alt="" className={className + " w-full"} />
-        </div>
-        <div>
-          <img src={slide1} alt="" className={className + " w-full"} />
-        </div>
-        <div>
-          <img src={slide1} alt="" className={className + " w-full"} />
-        </div>
+      <Carousel ref={ref} dots={dots} autoplay>
+        <img src={slide1} alt="" className={className + " w-full"} />
+        <img src={slide1} alt="" className={className + " w-full"} />
+        <img src={slide1} alt="" className={className + " w-full"} />
       </Carousel>
       <div
         className={`flex absolute top-1/2 w-full justify-between -translate-y-[50%] px-6 md:px-8`}

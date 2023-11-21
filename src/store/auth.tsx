@@ -1,24 +1,46 @@
-import { IUser, IUsers } from "@/interfaces/IUser";
 import { create } from "zustand";
+import { persist, devtools, createJSONStorage } from "zustand/middleware";
+import { IUser } from "@/interfaces/IUser";
 interface AuthState {
-  userLogged: IUsers;
-  updateAuth: (state: IUser, accessToken: string, refreshToken: string) => void;
+  userLogged: any;
+  updateAuth: (
+    state: IUser
+    // accessToken: string,
+    // refreshToken?: string
+  ) => void;
   removeAuth: () => void;
+  // checkLogged: boolean;
 }
-const initialState: IUsers = {
-  avatar: "",
-  email: "",
-  name: "",
-  isAdmin: false,
-  accessToken: "",
-  refreshToken: "",
-};
-export const authStore = create<AuthState>((set) => ({
-  userLogged: initialState,
-  updateAuth: (userLogged, accessToken, refreshToken) =>
-    set((state) => ({
-      ...state,
-      userLogged: { ...userLogged, accessToken, refreshToken },
-    })),
-  removeAuth: () => set({ userLogged: initialState }),
-}));
+
+const log = (config: any) => (set: any, get: any, api: any) =>
+  config(
+    (...args: any[]) => {
+      console.log("  applying", args);
+      set(...args);
+      console.log("  new state", get());
+    },
+    get,
+    api
+  );
+export const useAuthStore = create<AuthState>()(
+  devtools(
+    log(
+      persist(
+        (set: any) => ({
+          userLogged: null,
+          updateAuth: (userLogged: any) =>
+            set((state: any) => ({
+              ...state,
+              userLogged: { ...userLogged },
+            })),
+          removeAuth: () => set({ userLogged: null }),
+          // checkLogged:
+        }),
+        {
+          name: "userLoggedStorage",
+          storage: createJSONStorage(() => sessionStorage),
+        }
+      )
+    )
+  )
+);

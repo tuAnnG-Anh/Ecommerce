@@ -18,6 +18,7 @@
     "antd-img-crop": "^4.17.0",
     "axios": "^1.6.1",
     "formik": "^2.4.5",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.6.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -41,5 +43,6 @@
     "tailwindcss": "^3.3.5",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
-  }
+  },
+  "proxy": "https://run.mocky.io/v3/bd5e262c-4408-4af9-b8f3-7a75da6f4354"
 }

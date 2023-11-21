@@ -22,7 +22,7 @@ export const AdminLayout: React.FC<Props> = (props: Props) => {
         <Layout
           className={`${
             collapsed ? "ml-20" : "ml-[200px]"
-          } min-h-screen transition-all`}
+          } min-h-screen transition-all w-full relative`}
         >
           <HeaderComponent>
             <Button

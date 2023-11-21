@@ -4,13 +4,14 @@ import {
   SearchSearchNormal1Outline,
   EssetionalMenuOutline,
 } from "react-icons-sax";
-import { Layout } from "antd";
+import { Avatar, Layout } from "antd";
 import { useState } from "react";
 import { Logo } from "@components/Logo";
 import { MenuMobile } from "@/components/Layouts/MenuMobile";
-const Header = () => {
+import { useAuthStore } from "@/store/auth";
+const Header: React.FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
-
+  const userLogged = useAuthStore((state) => state.userLogged);
   const showDrawer = () => {
     setOpenDrawer(true);
   };
@@ -72,7 +73,24 @@ const Header = () => {
               <SearchSearchNormal1Outline className="cursor-pointer " />
             </div>
             <div className="hidden md:flex justify-center">
-              <UsersProfileCircleOutline className="cursor-pointer  " />
+              {userLogged ? (
+                <Avatar
+                  size="large"
+                  style={{
+                    backgroundColor: "#f56a00",
+                    verticalAlign: "middle",
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  {userLogged.name}
+                </Avatar>
+              ) : (
+                <UsersProfileCircleOutline className="cursor-pointer  " />
+              )}
             </div>
             <div className=" flex justify-center">
               <ShopBag2Outline className="mr-[0.31rem] cursor-pointer" />

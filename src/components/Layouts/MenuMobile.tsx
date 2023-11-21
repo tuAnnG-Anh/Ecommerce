@@ -13,7 +13,7 @@ import { Menu } from "antd";
 
 import type { MenuProps } from "antd";
 import { useNavigate } from "react-router-dom";
-import { authStore } from "@/store/auth";
+// import { useAuthStore } from "@/store/auth";
 interface Props {
   onClose?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   open?: boolean;
@@ -60,8 +60,8 @@ const items: MenuItem[] = [
 // submenu keys of first level
 const rootSubmenuKeys = ["home", "shop", "product", "contact"];
 export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
-  const { userLogged } = authStore();
-  console.log(userLogged);
+  // const { userLogged } = useAuthStore();
+  // console.log(userLogged);
   const navigate = useNavigate();
   const [openKeys, setOpenKeys] = useState(["home"]);
   const onOpenChange: MenuProps["onOpenChange"] = (keys) => {
