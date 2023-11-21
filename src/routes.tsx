@@ -6,7 +6,8 @@ import { LoginPage } from "./pages/Login";
 
 function AppRoutes() {
   const checkLogged = useAuthStore((state) => state.userLogged);
-  console.log(checkLogged.isAdmin);
+  // console.log(checkLogged.isAdmin);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,7 +25,11 @@ function AppRoutes() {
               key={index}
               path={route.path}
               element={
-                checkLogged?.isAdmin ? element : <Navigate to={"login"} />
+                !!checkLogged && checkLogged?.isAdmin ? (
+                  element
+                ) : (
+                  <Navigate to={"login"} />
+                )
               }
             />
           );

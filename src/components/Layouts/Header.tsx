@@ -96,7 +96,7 @@ const Header: React.FC = () => {
               <ShopBag2Outline className="mr-[0.31rem] cursor-pointer" />
             </div>
           </div>
-          <div className="noti text-xs w-5 h-5 rounded-full  bg-[#141718] flex justify-center items-center cursor-pointer">
+          <div className="noti text-xs w-5 h-5 rounded-full bg-[#141718] flex justify-center items-center cursor-pointer">
             <span className="text-white">2</span>
           </div>
         </div>
