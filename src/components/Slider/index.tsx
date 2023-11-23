@@ -12,17 +12,9 @@ interface Props {
   imgs?: [];
   className?: string;
   classArrow?: string;
-  // arrowRight: boolean | JSX.Element;
-  // arrowLeft: boolean | JSX.Element;
 }
-export const Slider = ({
-  dots,
-  // imgs,
-  className = "",
-  classArrow = "",
-}: Props) => {
+export const Slider = ({ dots, className = "", classArrow = "" }: Props) => {
   const ref = useRef<CarouselRef>(null);
-  // console.log(ref.current);
 
   return (
     <div className="relative">
@@ -40,7 +32,7 @@ export const Slider = ({
             " bg-white rounded-full p-2.5 overflow-hidden cursor-pointer"
           }
           onClick={() => {
-            ref?.current?.prev();
+            ref.current?.prev();
           }}
           style={{ height: "auto", width: "auto" }}
         />
@@ -50,7 +42,7 @@ export const Slider = ({
             " bg-white rounded-full p-2.5 overflow-hidden cursor-pointer"
           }
           onClick={() => {
-            ref?.current?.next();
+            ref.current?.next();
           }}
           style={{ height: "auto", width: "auto" }}
         />

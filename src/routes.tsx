@@ -1,17 +1,31 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { routes } from "@configs/route";
+import { privateRoutes, publicRoutes } from "@configs/route";
 import { Fragment } from "react";
 import { useAuthStore } from "./store/auth";
 import { LoginPage } from "./pages/Login";
 
 function AppRoutes() {
   const checkLogged = useAuthStore((state) => state.userLogged);
-  // console.log(checkLogged.isAdmin);
-
   return (
     <BrowserRouter>
       <Routes>
-        {routes.map((route, index) => {
+        {publicRoutes?.map((route, index) => {
+          const Page = route.page;
+          let Layout = route.layout;
+          route.layout ? (Layout = route.layout) : (Layout = Fragment);
+          return (
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <Layout>
+                  <Page />
+                </Layout>
+              }
+            />
+          );
+        })}
+        {privateRoutes?.map((route, index) => {
           const Page = route.page;
           let Layout = route.layout;
           route.layout ? (Layout = route.layout) : (Layout = Fragment);
@@ -24,17 +38,12 @@ function AppRoutes() {
             <Route
               key={index}
               path={route.path}
-              element={
-                !!checkLogged && checkLogged?.isAdmin ? (
-                  element
-                ) : (
-                  <Navigate to={"login"} />
-                )
-              }
+              element={checkLogged?.isAdmin ? element : <Navigate to={"/"} />}
             />
           );
         })}
         <Route key={"login"} path={"/login"} element={<LoginPage />} />
+        <Route key={"logout"} path={"/logout"} />
       </Routes>
     </BrowserRouter>
   );

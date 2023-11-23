@@ -8,24 +8,21 @@ import {
 } from "@ant-design/icons";
 import { Logo } from "@components/Logo";
 import React, { useState } from "react";
-
 import { Menu } from "antd";
-
 import type { MenuProps } from "antd";
 import { useNavigate } from "react-router-dom";
-// import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from "@/store/auth";
+import { logoutApi } from "@/api/auth";
 interface Props {
-  onClose?: (e: React.MouseEvent | React.KeyboardEvent) => void;
+  onClose: () => void;
   open?: boolean;
 }
 type MenuItem = Required<MenuProps>["items"][number];
-
 function getItem(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
   children?: MenuItem[],
-  // type?: "group",
   style?: React.CSSProperties
 ): MenuItem {
   return {
@@ -33,7 +30,6 @@ function getItem(
     icon,
     children,
     label,
-    // type,
     style,
   } as MenuItem;
 }
@@ -57,11 +53,9 @@ const items: MenuItem[] = [
   getItem("Contact Us", "contact us", null, undefined, {}),
 ];
 
-// submenu keys of first level
 const rootSubmenuKeys = ["home", "shop", "product", "contact"];
 export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
-  // const { userLogged } = useAuthStore();
-  // console.log(userLogged);
+  const { userLogged, removeAuth } = useAuthStore();
   const navigate = useNavigate();
   const [openKeys, setOpenKeys] = useState(["home"]);
   const onOpenChange: MenuProps["onOpenChange"] = (keys) => {
@@ -71,6 +65,14 @@ export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
     } else {
       setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
     }
+  };
+  const handleLogout = async () => {
+    await logoutApi();
+    localStorage.removeItem("accessToken");
+    removeAuth();
+    console.log("day la ham", onClose);
+    onClose();
+    navigate("/");
   };
   return (
     <Drawer
@@ -111,7 +113,7 @@ export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
             openKeys={openKeys}
             onOpenChange={onOpenChange}
             items={items}
-            className="!border-e-0 [&>li>.ant-menu-submenu-title]:!rounded-none [&>li>.ant-menu-submenu-title]:!w-full [&>li>.ant-menu-submenu-title]:!p-[.5rem_0_.5rem_0]  [&>li>.ant-menu-submenu-title]:!m-[.5rem_0_0_0] [&>li]:!rounded-none [&>*:first-child]:!p-[.5rem_0_.5rem_0]  [&>li]:!border-b [&>li]:!m-[.5rem_0_0_0] [&>li]:!w-full [&>*:last-child]:!p-[.5rem_0_.5rem_0]"
+            className="drawer-item"
           />
         </div>
         <div className="drawer__bottom h-[13.125rem] justify-between flex flex-col">
@@ -123,14 +125,21 @@ export const MenuMobile: React.FC<Props> = ({ onClose, open }: Props) => {
               getItem("Cart", "cart", null, undefined, {}),
               getItem("Wishlist", "wishlist", null, undefined, {}),
             ]}
-            className="!border-e-0 [&>li>.ant-menu-submenu-title]:!rounded-none [&>li>.ant-menu-submenu-title]:!w-full [&>li>.ant-menu-submenu-title]:!p-[.5rem_0_.5rem_0]  [&>li>.ant-menu-submenu-title]:!m-[.5rem_0_0_0] [&>li]:!rounded-none [&>*:first-child]:!p-[.5rem_0_.5rem_0]  [&>li]:!border-b [&>li]:!m-[.5rem_0_0_0] [&>li]:!w-full [&>*:last-child]:!p-[.5rem_0_.5rem_0] "
+            className="drawer-item"
           />
-          <button
-            className="w-full bg-neutral-700 text-white py-[0.62rem] h-auto rounded-md text-lg font-medium leading-8 -tracking-[0.025rem]"
-            onClick={() => navigate("login")}
-          >
-            Sign In
-          </button>
+          {!userLogged ? (
+            <button
+              className="w-full bg-neutral-700 text-white py-[0.62rem] h-auto rounded-md text-lg font-medium leading-8 -tracking-[0.025rem]"
+              onClick={() => navigate("login")}
+            >
+              Sign In
+            </button>
+          ) : (
+            <div>
+              <p>{userLogged.name}</p>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
           <div className="socical flex gap-6">
             <a href="">
               <FacebookOutlined className="text-2xl" />

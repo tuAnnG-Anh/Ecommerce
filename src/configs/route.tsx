@@ -6,39 +6,41 @@ import { AdminLayout } from "@/pages/Admin/Layout";
 import NotFound from "@/pages/NotFound";
 import { AdminUser } from "@/pages/Admin/screens/User";
 import { AdminProduct } from "@/pages/Admin/screens/Product";
+import { PATH } from "./constant";
 
 //Public routes
-export const routes = [
+const publicRoutes = [
   {
-    path: "/",
+    path: PATH.HOME,
     page: HomePage,
     layout: DefaultLayout,
   },
   {
-    path: "product/:id",
+    path: PATH.PRODUCT_DETAIL,
     page: DetailPage,
     layout: DefaultLayout,
   },
   {
-    path: "dashboard",
-    page: Dashboard,
-    layout: AdminLayout,
-  },
-  {
-    path: "admin/product",
-    page: AdminProduct,
-    layout: AdminLayout,
-  },
-  {
-    path: "admin/user",
-    page: AdminUser,
-    layout: AdminLayout,
-  },
-  {
-    path: "*",
+    path: PATH.ALL,
     page: NotFound,
   },
 ];
 
-// const privateRoutes = [];
-// export { publicRoutes };
+const privateRoutes = [
+  {
+    path: PATH.DASHBOARD,
+    page: Dashboard,
+    layout: AdminLayout,
+  },
+  {
+    path: PATH.PRODUCT_MANAGER,
+    page: AdminProduct,
+    layout: AdminLayout,
+  },
+  {
+    path: PATH.USER_MANAGER,
+    page: AdminUser,
+    layout: AdminLayout,
+  },
+];
+export { publicRoutes, privateRoutes };

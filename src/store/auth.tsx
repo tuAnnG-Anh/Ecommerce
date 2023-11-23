@@ -3,13 +3,8 @@ import { persist, devtools, createJSONStorage } from "zustand/middleware";
 import { IUser } from "@/interfaces/IUser";
 interface AuthState {
   userLogged: any;
-  updateAuth: (
-    state: IUser
-    // accessToken: string,
-    // refreshToken?: string
-  ) => void;
+  updateAuth: (state: IUser) => void;
   removeAuth: () => void;
-  // checkLogged: boolean;
 }
 
 const log = (config: any) => (set: any, get: any, api: any) =>
@@ -34,7 +29,6 @@ export const useAuthStore = create<AuthState>()(
               userLogged: { ...userLogged },
             })),
           removeAuth: () => set({ userLogged: null }),
-          // checkLogged:
         }),
         {
           name: "userLoggedStorage",

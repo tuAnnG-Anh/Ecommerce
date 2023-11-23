@@ -32,7 +32,16 @@
 /* .ant-menu-title-content:hover {
   @apply bg-neutral-300;
 } */
+.drawer-item {
+  @apply !border-e-0 [&>li>.ant-menu-submenu-title]:!rounded-none [&>li>.ant-menu-submenu-title]:!w-full [&>li>.ant-menu-submenu-title]:!p-[.5rem_0_.5rem_0]  [&>li>.ant-menu-submenu-title]:!m-[.5rem_0_0_0] [&>li]:!rounded-none [&>*:first-child]:!p-[.5rem_0_.5rem_0]  [&>li]:!border-b [&>li]:!m-[.5rem_0_0_0] [&>li]:!w-full [&>*:last-child]:!p-[.5rem_0_.5rem_0];
+}
+.ant-btn-primary {
+  @apply bg-secondary-blue;
+}
+.banner--item__right {
+  @apply h-48 md:h-60 2xl:h-80 bg-[#F3F5F7] md:row-span-1 bg-[url('/src/resources/images/bedroom.jpeg')]  bg-42% bg-[center_right_0rem] bg-blend-multiply bg-no-repeat relative;
+}
 
-.ant-btn-primary{
-  @apply bg-secondary-blue
+.bg--img {
+  @apply bg-contain bg-blend-multiply bg-no-repeat;
 }

@@ -12,7 +12,7 @@ export const CardProduct: React.FC<Props> = (props: Props) => {
   return (
     <div
       key={props?.id}
-      className="snap-center min-w-[15rem] flex flex-col gap-3 shrink-0 self-stretch  mb-10"
+      className="snap-center min-w-[15rem] flex flex-col gap-3 shrink-0 self-stretch  mb-10 md:mb-12"
       onClick={() => navigate(`/product/${props.id}`)}
     >
       <div

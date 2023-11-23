@@ -13,7 +13,7 @@ const DefaultLayout: React.FC<Props> = (props: Props) => {
     <div className="wrapper">
       <NotificationBar />
       <Header />
-      <section id="content" className="font-Inter relative bg-white ">
+      <section id="content" className="font-Inter relative bg-white max-w-full">
         {props.children}
       </section>
       <Footer />

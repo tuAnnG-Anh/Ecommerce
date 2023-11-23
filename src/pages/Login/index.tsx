@@ -30,18 +30,18 @@ export const LoginPage: React.FC = () => {
       if (data?.accessToken) {
         const decoded = jwtDecode(data?.accessToken) as JwtPayload;
         if (decoded?.id) {
-          handleGetDetailsUser(decoded?.id, data?.accessToken);
+          handleStoreUserLogged(decoded?.id, data?.accessToken);
         }
       }
-      navigate("/");
     },
     onError: (err) => console.log(err),
   });
 
-  const handleGetDetailsUser = async (id: string | number, token: string) => {
+  const handleStoreUserLogged = async (id: string | number, token: string) => {
     const user = await getUserById(id, token);
     const userLogged = { ...user.data, token };
     updateAuth(userLogged);
+    navigate("/");
   };
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,14 +52,21 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="image-login bg-[url('./src/resources/images/loginimg.svg')] bg-top bg-cover bg-blend-multiply bg-no-repeat h-[26.875rem] py-8">
-        <div>
-          <Logo className="text-[1.5rem]" />
-        </div>
+    <div className="md:grid md:grid-cols-2 gap-20 ">
+      <div
+        className=" bg-[url('./src/resources/images/loginimg.svg')] bg-neutral-200 bg-center bg-cover bg-no-repeat h-[26.875rem] md:h-screen  py-8 md:p-0"
+        style={{
+          backgroundSize: "100% 100%",
+        }}
+      >
+        <Logo className="text-[1.5rem]" />
       </div>
-      <div className="px-8 container lg:w-9/12 mx-auto ">
-        <form className="my-10 grid gap-8" onSubmit={handleLogin} method="POST">
+      <div className="px-8 md:pl-0 max-w-[28.5rem] container md:mt-[20%] mx-auto">
+        <form
+          className="my-10 md:m-0 grid gap-8"
+          onSubmit={handleLogin}
+          method="POST"
+        >
           <div>
             <h1 className="font-Poppins font-medium text-[2.5rem] leading-[2.75rem] -tracking-[0.025rem] text-neutral-700">
               Sign In
@@ -107,8 +114,8 @@ export const LoginPage: React.FC = () => {
               />
             )}
           </div>
-          <div className="flex flex-row justify-between items-center">
-            <label className="relative inline-flex items-center mr-3 cursor-pointer select-none">
+          <div className="flex  justify-between ">
+            <label className="relative flex items-center mr-3 cursor-pointer select-none">
               <input type="checkbox" value="" className="sr-only peer" />
               <div className="w-5 h-5 bg-white border-2 border-neutral-400 peer peer-checked:border-0 peer-checked:bg-secondary-blue rounded">
                 <img
@@ -117,13 +124,11 @@ export const LoginPage: React.FC = () => {
                   alt="tick"
                 />
               </div>
-              <span className="ml-3 leading-[1.625rem] text-neutral-400">
-                Remember me
-              </span>
+              <span className="ml-3 text-neutral-400">Remember me</span>
             </label>
             <a
               href=""
-              className="mr-4 text-neutral-700 font-semibold text-xs leading-5"
+              className="mr-4 text-neutral-700 font-semibold text-sm leading-5"
             >
               Forgot password?
             </a>

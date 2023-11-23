@@ -9,6 +9,12 @@ import { useState } from "react";
 import { Logo } from "@components/Logo";
 import { MenuMobile } from "@/components/Layouts/MenuMobile";
 import { useAuthStore } from "@/store/auth";
+const menuItem = [
+  { title: "Home" },
+  { title: "Shop" },
+  { title: "Product" },
+  { title: "Contact Us" },
+];
 const Header: React.FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const userLogged = useAuthStore((state) => state.userLogged);
@@ -35,40 +41,19 @@ const Header: React.FC = () => {
 
         {/* nav-bar */}
         <ul className="text-sm leading-6 font-Space_Grotesk font-medium hidden md:flex gap-10 items-center text-neutral-400 ">
-          <li
-            className="cursor-pointer hover:text-black before:content-[attr(title)] before:block before:font-bold before:text-neutral-700 placeholder:inline-block before:h-0  before:invisible overflow-hidden hover:font-bold"
-            title="Menu"
-          >
-            Menu
-          </li>
-          <li
-            className=" cursor-pointer before:content-[attr(title)] before:block before:font-bold before:text-neutral-700 placeholder:inline-block before:h-0 before:invisible overflow-hidden hover:font-bold hover:text-black"
-            title="Shop"
-          >
-            Shop
-          </li>
-          <li
-            className=" cursor-pointer before:content-[attr(title)] before:block before:font-bold before:text-neutral-700 placeholder:inline-block before:h-0 before:invisible overflow-hidden hover:font-bold hover:text-black"
-            title="Product"
-          >
-            Product
-          </li>
-          <li
-            className=" cursor-pointer before:content-[attr(title)] before:block before:font-bold before:text-neutral-700 placeholder:inline-block before:h-0 before:invisible overflow-hidden hover:font-bold hover:text-black"
-            title="Contact Us"
-          >
-            Contact Us
-          </li>
+          {menuItem.map((item) => (
+            <li
+              className="cursor-pointer hover:text-black before:content-[attr(title)] before:block before:font-bold before:text-neutral-700 placeholder:inline-block before:h-0  before:invisible overflow-hidden hover:font-bold"
+              title={item.title}
+            >
+              {item.title}
+            </li>
+          ))}
         </ul>
 
         {/* user */}
         <div className="flex justify-center items-center ">
           <div className="text-xl text-neutral-700 flex gap-4">
-            {/* <Input
-              placeholder="Basic usage"
-              className={`w-0 ${!isShowInput ? "  hidden" : "block"} w-10 h-full`}
-            /> */}
-
             <div className="hidden md:flex justify-center">
               <SearchSearchNormal1Outline className="cursor-pointer " />
             </div>

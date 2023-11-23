@@ -9,7 +9,6 @@ export const getUser = async (page: number | string, limit: number | string) =>
       _size: limit,
     },
   });
-// .then((res) => res.data);
 export const getUserById = async (id: number | string, token: string) => {
   const response = await ApiClient.get(`user/${id}`, {
     headers: {
