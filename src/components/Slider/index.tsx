@@ -9,19 +9,30 @@ import slide1 from "@resources/images/0db6128ab1993d65eae0e96498fbd94e.jpeg";
 
 interface Props {
   dots?: boolean | { className?: string };
-  imgs?: [];
-  className?: string;
-  classArrow?: string;
+  // imgs: [];
+  className: string;
+  classArrow: string;
+  // styleItem: React.CSSProperties;
 }
+const sliderData = [
+  { key: "1", children: slide1 },
+  { key: "2", children: slide1 },
+  { key: "3", children: slide1 },
+];
 export const Slider = ({ dots, className = "", classArrow = "" }: Props) => {
   const ref = useRef<CarouselRef>(null);
 
   return (
     <div className="relative">
       <Carousel ref={ref} dots={dots} autoplay>
-        <img src={slide1} alt="" className={className + " w-full"} />
-        <img src={slide1} alt="" className={className + " w-full"} />
-        <img src={slide1} alt="" className={className + " w-full"} />
+        {sliderData.map((item) => (
+          <img
+            src={item.children}
+            alt=""
+            className={className + " w-full"}
+            key={item.key}
+          />
+        ))}
       </Carousel>
       <div
         className={`flex absolute top-1/2 w-full justify-between -translate-y-[50%] px-6 md:px-8`}

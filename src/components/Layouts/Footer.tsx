@@ -25,7 +25,7 @@ const Footer = () => {
           <li className="cursor-pointer">Contact us</li>
         </ul>
         {/* socical */}
-        <div className="py-6 md:p-4 md:col-span-2 flex flex-col items-center gap-8 md:flex-row-reverse justify-between w-full border-t-[0.5px] border-neutral-400 text-xs leading-5 font-Poppins text-neutral-100">
+        <div className="py-6 md:px-0 md:p-4 md:col-span-2 flex flex-col items-center gap-8 md:flex-row-reverse justify-between w-full border-t-[0.5px] border-neutral-400 text-xs leading-5 font-Poppins text-neutral-100">
           <div className="socical flex gap-6">
             <EssetionalInstagramOutline className="cursor-pointer" />
             <CryptoCompanyFacebookLinear className="cursor-pointer" />

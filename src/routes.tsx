@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { privateRoutes, publicRoutes } from "@configs/route";
 import { Fragment } from "react";
 import { useAuthStore } from "./store/auth";
-import { LoginPage } from "./pages/Login";
+import { LoginPage } from "./pages/Auth/Login";
+import { RegisterPage } from "./pages/Auth/Register";
 
 function AppRoutes() {
   const checkLogged = useAuthStore((state) => state.userLogged);
@@ -43,7 +44,7 @@ function AppRoutes() {
           );
         })}
         <Route key={"login"} path={"/login"} element={<LoginPage />} />
-        <Route key={"logout"} path={"/logout"} />
+        <Route key={"register"} path={"/register"} element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -18,21 +18,25 @@ import { Slider } from "@/components/Slider";
 
 const cardItem = [
   {
+    key: "1",
     title: "Free Shipping",
     text: "Order above $200",
     icon: <DeliveryTruckFastOutline className="!w-12 !h-12" />,
   },
   {
+    key: "2",
     title: "Money-back",
     text: "30 days guarantee",
     icon: <MoneyCardPosOutline className="!w-12 !h-12" />,
   },
   {
+    key: "3",
     title: "Secure Payments",
     text: "Secured by Stripe",
     icon: <SecurityLockOutline className="!w-12 !h-12" />,
   },
   {
+    key: "4",
     title: "24/7 Support",
     text: "Phone and Email support",
     icon: <CarCallOutline className="!w-12 !h-12" />,
@@ -136,7 +140,10 @@ const HomePage: React.FC = () => {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2 md:gap-x-6 gap-y-10 py-8 md:py-12  ">
         {cardItem.map((item) => (
-          <div className="px-4 py-8 bg-neutral-200 text-neutral-700 gap-4 flex flex-col lg:px-8 lg:py-12">
+          <div
+            className="px-4 py-8 bg-neutral-200 text-neutral-700 gap-4 flex flex-col lg:px-8 lg:py-12"
+            key={item.key}
+          >
             {item.icon}
             <div className="text-neutral-700 text-sm leading-[1.375rem]">
               <h4 className="font-semibold">{item.title}</h4>

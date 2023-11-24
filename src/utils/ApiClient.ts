@@ -16,12 +16,13 @@ ApiClient.interceptors.request.use(
   async (config) => {
     // Do something before request is sent
     const accessToken = JSON.parse(
-      localStorage.getItem("accessToken") as string
+      JSON.stringify(localStorage.getItem("accessToken"))
     );
     const date = new Date();
-    const decoded = jwtDecode(accessToken as string);
+    const decoded = jwtDecode(accessToken);
     if (decoded?.exp && decoded.exp < date.getTime() / 1000) {
       const data = await refreshToken();
+      JSON.stringify(localStorage.setItem("accessToken", data.accessToken));
       config.headers["Token"] = `Bearer ${data.accessToken}`;
     }
     return config;
@@ -42,15 +43,15 @@ ApiClient.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    if (lodash.get(error, "response.status") === 403) {
+    if (error.response.status === 401) {
       notification.error({
-        message: "Phiên làm việc hết hạn. Vui lòng làm mới trình duyệt",
+        message: "Session expired. Please refresh your browser",
         key: "TOKEN_EXPIRED",
       });
-      // window.location.href = "/login";
+      setTimeout(() => (window.location.href = "/login"), 2000);
     } else if (lodash.get(error, "response.status") >= 500) {
       notification.error({
-        message: "Máy chủ gặp sự cố. Vui lòng thử lại sau",
+        message: "The server encountered a problem. Please try again later",
         key: "server_error",
       });
     }

@@ -73,7 +73,12 @@ export const LoginPage: React.FC = () => {
             </h1>
             <p className="text-neutral-400 mt-6 leading-[1.625rem] ">
               Don’t have an accout yet?
-              <a className="text-secondary-green font-semibold"> Sign up</a>
+              <a
+                className="text-secondary-green font-semibold cursor-pointer"
+                onClick={() => navigate("/register")}
+              >
+                Sign up
+              </a>
             </p>
           </div>
           {loginMutation?.data?.status === "ERR" && (
@@ -142,7 +147,7 @@ export const LoginPage: React.FC = () => {
               className="py-[0.62rem] w-full text-white leading-7 -tracking-[0.025rem] bg-neutral-700 hover:bg-neutral-500 rounded-lg"
               type="submit"
             >
-              Sign Up
+              Sign In
             </button>
           </Spin>
         </form>

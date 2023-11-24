@@ -5,6 +5,7 @@ interface AuthState {
   userLogged: any;
   updateAuth: (state: IUser) => void;
   removeAuth: () => void;
+  removeStore: () => void;
 }
 
 const log = (config: any) => (set: any, get: any, api: any) =>
@@ -29,6 +30,7 @@ export const useAuthStore = create<AuthState>()(
               userLogged: { ...userLogged },
             })),
           removeAuth: () => set({ userLogged: null }),
+          removeStore: () => set({}, true),
         }),
         {
           name: "userLoggedStorage",

@@ -4,23 +4,83 @@ import {
   SearchSearchNormal1Outline,
   EssetionalMenuOutline,
 } from "react-icons-sax";
-import { Avatar, Layout } from "antd";
+import { Avatar, Dropdown, Layout, MenuProps } from "antd";
 import { useState } from "react";
 import { Logo } from "@components/Logo";
 import { MenuMobile } from "@/components/Layouts/MenuMobile";
 import { useAuthStore } from "@/store/auth";
+
+import { useNavigate } from "react-router-dom";
+import {
+  LogoutOutlined,
+  UserOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
+import { logoutApi } from "@/api/auth";
 const menuItem = [
-  { title: "Home" },
-  { title: "Shop" },
-  { title: "Product" },
-  { title: "Contact Us" },
+  { title: "Home", key: "1" },
+  { title: "Shop", key: "2" },
+  { title: "Product", key: "3" },
+  { title: "Contact Us", key: "4" },
 ];
 const Header: React.FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const [itemActive, setItemActive] = useState("1");
+  const { removeAuth } = useAuthStore();
+  const navigate = useNavigate();
   const userLogged = useAuthStore((state) => state.userLogged);
   const showDrawer = () => {
     setOpenDrawer(true);
   };
+  const handleLogout = async () => {
+    await logoutApi();
+    console.log("fdsa");
+    localStorage.removeItem("accessToken");
+    removeAuth();
+    window.location.reload();
+  };
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          Your account
+        </a>
+      ),
+      icon: <UserOutlined />,
+    },
+    {
+      key: "2",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          Setting
+        </a>
+      ),
+      icon: <SettingOutlined />,
+    },
+    {
+      key: "3",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.preventDefault()}
+        >
+          Logout
+        </a>
+      ),
+      icon: <LogoutOutlined />,
+      onClick: handleLogout,
+    },
+  ];
 
   const onCloseDrawer = () => {
     setOpenDrawer(false);
@@ -40,15 +100,25 @@ const Header: React.FC = () => {
         </Logo>
 
         {/* nav-bar */}
-        <ul className="text-sm leading-6 font-Space_Grotesk font-medium hidden md:flex gap-10 items-center text-neutral-400 ">
+        <ul className="text-sm leading-6 font-Space_Grotesk font-medium hidden md:flex gap-10 items-center text-neutral-400 relative ">
           {menuItem.map((item) => (
             <li
-              className="cursor-pointer hover:text-black before:content-[attr(title)] before:block before:font-bold before:text-neutral-700 placeholder:inline-block before:h-0  before:invisible overflow-hidden hover:font-bold"
+              className={`${
+                itemActive === item.key ? "font-bold text-black" : "font-normal"
+              } cursor-pointer hover:text-black before:content-[attr(title)] before:block before:font-bold before:text-neutral-700 placeholder:inline-block before:h-0  before:invisible overflow-hidden hover:font-bold`}
               title={item.title}
+              onClick={() => setItemActive(item.key)}
+              key={item.key}
             >
               {item.title}
             </li>
           ))}
+          <div
+            className="w-1/6 absolute h-0.5 bg-black bottom-0 transition-all ease-in-out duration-300"
+            style={{
+              marginLeft: `${(+itemActive - 1) * 25}%`,
+            }}
+          ></div>
         </ul>
 
         {/* user */}
@@ -59,22 +129,27 @@ const Header: React.FC = () => {
             </div>
             <div className="hidden md:flex justify-center">
               {userLogged ? (
-                <Avatar
-                  size="large"
-                  style={{
-                    backgroundColor: "#f56a00",
-                    verticalAlign: "middle",
-                    width: "1.5rem",
-                    height: "1.5rem",
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  {userLogged.name}
-                </Avatar>
+                <Dropdown menu={{ items }}>
+                  <Avatar
+                    size="large"
+                    style={{
+                      backgroundColor: "#f56a00",
+                      verticalAlign: "middle",
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      display: "flex",
+                      alignItems: "center",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {userLogged.name}
+                  </Avatar>
+                </Dropdown>
               ) : (
-                <UsersProfileCircleOutline className="cursor-pointer  " />
+                <UsersProfileCircleOutline
+                  className="cursor-pointer"
+                  onClick={() => navigate("login")}
+                />
               )}
             </div>
             <div className=" flex justify-center">
