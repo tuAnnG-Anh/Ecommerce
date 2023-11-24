@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import lodash from "lodash";
 
 export const ApiClient = axios.create({
-  baseURL: "http://localhost:3001/api/",
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: 1000,
   headers: {
     "Content-Type": "application/json",
