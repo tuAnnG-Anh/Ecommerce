@@ -152,7 +152,6 @@ export const DetailPage: React.FC<Props> = () => {
                 className="flex-1 bg-transparent text-primary  hover:!bg-neutral-700 hover:!text-white"
               />
             </div>
-            <ButtonCustom text="Add to cart" />
           </div>
         </div>
       </div>
