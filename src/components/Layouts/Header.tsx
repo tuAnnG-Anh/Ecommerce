@@ -116,7 +116,7 @@ const Header: React.FC = () => {
           <div
             className="w-1/6 absolute h-0.5 bg-black bottom-0 transition-all ease-in-out duration-300"
             style={{
-              marginLeft: `${(+itemActive - 1) * 25}%`,
+              marginLeft: `${(+itemActive - 1) * 20}%`,
             }}
           ></div>
         </ul>

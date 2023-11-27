@@ -39,7 +39,7 @@ export const RegisterPage: React.FC = () => {
 
   const handleStoreUserLogged = async (id: string | number, token: string) => {
     const user = await getUserById(id, token);
-    const userLogged = { ...user.data, token };
+    const userLogged = { ...user.data, accessToken: token };
     updateAuth(userLogged);
     navigate("/");
   };

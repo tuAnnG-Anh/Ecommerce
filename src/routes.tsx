@@ -39,7 +39,9 @@ function AppRoutes() {
             <Route
               key={index}
               path={route.path}
-              element={checkLogged?.isAdmin ? element : <Navigate to={"/"} />}
+              element={
+                checkLogged?.user.isAdmin ? element : <Navigate to={"/"} />
+              }
             />
           );
         })}

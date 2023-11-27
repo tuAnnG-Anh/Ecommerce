@@ -13,14 +13,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IAccount } from "@/interfaces/IUser";
 import { useAuthStore } from "@/store/auth";
-import { jwtDecode } from "jwt-decode";
-import { JwtPayload } from "@/interfaces/Jwt";
-import { getUserById } from "@/api/user";
 
 export const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [account, setAccount] = useState<IAccount>({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
   const { updateAuth } = useAuthStore();
   const loginMutation = useMutation({
@@ -28,27 +27,16 @@ export const LoginPage: React.FC = () => {
     onSuccess(data) {
       localStorage.setItem("accessToken", JSON.stringify(data?.accessToken));
       if (data?.accessToken) {
-        const decoded = jwtDecode(data?.accessToken) as JwtPayload;
-        if (decoded?.id) {
-          handleStoreUserLogged(decoded?.id, data?.accessToken);
-        }
+        updateAuth(data);
+        navigate("/");
       }
     },
     onError: (err) => console.log(err),
   });
 
-  const handleStoreUserLogged = async (id: string | number, token: string) => {
-    const user = await getUserById(id, token);
-    const userLogged = { ...user.data, token };
-    updateAuth(userLogged);
-    navigate("/");
-  };
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginMutation.mutate({
-      email,
-      password,
-    });
+    loginMutation.mutate(account);
   };
 
   return (
@@ -96,7 +84,7 @@ export const LoginPage: React.FC = () => {
             className="focus:outline-none leading-[1.625rem] text-neutral-400 pb-3 border-b"
             required
             name="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setAccount({ ...account, email: e.target.value })}
           />
           <div className="input-password relative text-neutral-400">
             <input
@@ -104,7 +92,9 @@ export const LoginPage: React.FC = () => {
               placeholder="Password"
               name="password"
               required
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) =>
+                setAccount({ ...account, password: e.target.value })
+              }
               className="focus:outline-none leading-[1.625rem]  pb-3 border-b w-full"
             />
             {showPassword ? (

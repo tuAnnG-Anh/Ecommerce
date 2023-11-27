@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="logo  flex flex-col justify-start items-center gap-4 md:gap-8 md:flex-row">
           <h3 className="cursor-pointer font-Poppins relative text-2xl md:text-2xl leading-6 md:pb-0 font-medium pb-6 md:pr-8">
             3legant<span className="text-[#6C7275]">.</span>
-            <div className="bg-neutral-400 w-[0.125rem] h-6 absolute right-0 top-2/4 -translate-y-1/2"></div>
+            <div className="bg-neutral-400 md:w-[0.125rem] md:h-6 absolute md:right-0 md:top-2/4 md:-translate-y-1/2 bottom-0 right-1/2 rotate-90 w-1 h-10 top-6"></div>
           </h3>
           <p className="">Gift & Decoration Store</p>
         </div>
