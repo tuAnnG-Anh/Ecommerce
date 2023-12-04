@@ -12,12 +12,12 @@ export const CardProduct: React.FC<Props> = (props: Props) => {
   return (
     <div
       key={props?.id}
-      className="snap-center min-w-[15rem]  flex flex-col gap-3 shrink-0 self-stretch  mb-10 md:mb-12"
+      className="snap-center min-w-[15rem]  flex flex-col gap-3 shrink-0 self-stretch  mb-10 md:mb-12 "
       onClick={() => navigate(`/product/${props.id}`)}
     >
       <div
         style={{ backgroundImage: `url('${props?.img}')` }}
-        className={`group/edit h-80 flex bg-neutral-200 relative cursor-pointer  bg-center bg-blend-multiply bg-no-repeat bg-contain overflow-hidden hover:shadow-[0_0_20px_0_rgba(0,0,0,.35)] transition-shadow`}
+        className={`group/edit h-80 flex bg-neutral-200 relative cursor-pointer  bg-center bg-blend-multiply bg-no-repeat bg-contain overflow-hidden  transition-shadow`}
       >
         <ButtonCustom
           text="Add to cart"
@@ -34,7 +34,7 @@ export const CardProduct: React.FC<Props> = (props: Props) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 ">
         <Rate
           disabled
           allowHalf

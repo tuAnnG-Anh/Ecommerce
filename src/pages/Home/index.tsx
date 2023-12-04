@@ -153,7 +153,7 @@ const HomePage: React.FC = () => {
         ))}
       </div>
       {/* banner */}
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:w-screen md:ml-[calc(50%)] md:-translate-x-1/2">
         <img
           src={bannerImg}
           alt=""
@@ -204,7 +204,7 @@ const HomePage: React.FC = () => {
       {/* subscribe */}
 
       <div
-        className={`bg-[#F2F4F6] bg--img  bg-cover bg-[url(${contactImg})] bg-center`}
+        className={`bg-[#F2F4F6] bg--img  bg-cover bg-[url(${contactImg})] bg-center w-screen ml-[calc(50%)] -translate-x-1/2`}
         style={{
           backgroundSize: "auto 100%",
         }}
